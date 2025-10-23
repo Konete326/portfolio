@@ -22,6 +22,7 @@ const Navbar = () => {
     { name: 'About', href: '#about' },
     { name: 'Skills', href: '#skills' },
     { name: 'Projects', href: '#projects' },
+    { name: 'Gallery', href: '#gallery' },
     { name: 'Contact', href: '#contact' },
   ];
 
@@ -38,9 +39,9 @@ const Navbar = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg'
+          ? 'glass shadow-2xl'
           : 'bg-transparent'
       }`}
     >
@@ -51,7 +52,7 @@ const Navbar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600"
+            className="text-xl md:text-2xl font-bold gradient-text"
           >
             Muhammad Sameer
           </motion.div>
@@ -66,42 +67,69 @@ const Navbar = () => {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 font-medium"
+                className="relative text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 font-medium group"
               >
                 {item.name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 group-hover:w-full transition-all duration-300" />
               </motion.a>
             ))}
             
-            {/* Theme Toggle */}
+            {/* Premium Theme Toggle */}
             <motion.button
               onClick={toggleTheme}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors duration-300"
+              className="relative p-3 rounded-full glass hover:scale-110 transition-all duration-300 group overflow-hidden"
               aria-label="Toggle theme"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
             >
-              {theme === 'light' ? (
-                <Moon className="w-5 h-5 text-gray-700" />
-              ) : (
+              <motion.div
+                initial={false}
+                animate={{
+                  rotate: theme === 'dark' ? 0 : 180,
+                  scale: theme === 'dark' ? 1 : 0
+                }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="absolute inset-0 flex items-center justify-center"
+              >
                 <Sun className="w-5 h-5 text-yellow-400" />
-              )}
+              </motion.div>
+              <motion.div
+                initial={false}
+                animate={{
+                  rotate: theme === 'light' ? 180 : 0,
+                  scale: theme === 'light' ? 1 : 0
+                }}
+                transition={{ duration: 0.5, ease: "easeInOut" }}
+                className="flex items-center justify-center"
+              >
+                <Moon className="w-5 h-5 text-indigo-400" />
+              </motion.div>
+              <span className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-orange-400 dark:from-indigo-500 dark:to-purple-500 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300" />
             </motion.button>
           </div>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center space-x-4">
-            <button
+            <motion.button
               onClick={toggleTheme}
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700"
+              className="relative p-2 rounded-full glass"
               aria-label="Toggle theme"
+              whileTap={{ scale: 0.95 }}
             >
-              {theme === 'light' ? (
-                <Moon className="w-5 h-5 text-gray-700" />
-              ) : (
-                <Sun className="w-5 h-5 text-yellow-400" />
-              )}
-            </button>
+              <motion.div
+                animate={{ rotate: theme === 'dark' ? 0 : 180 }}
+                transition={{ duration: 0.3 }}
+              >
+                {theme === 'light' ? (
+                  <Moon className="w-5 h-5 text-indigo-400" />
+                ) : (
+                  <Sun className="w-5 h-5 text-yellow-400" />
+                )}
+              </motion.div>
+            </motion.button>
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-2 text-gray-700 dark:text-gray-300"
@@ -123,7 +151,7 @@ const Navbar = () => {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           exit={{ opacity: 0, height: 0 }}
-          className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800"
+          className="md:hidden glass border-t border-white/10 dark:border-gray-800"
         >
           <div className="px-4 py-4 space-y-3">
             {navItems.map((item) => (
