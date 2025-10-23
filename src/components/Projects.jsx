@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, Award, Users, TrendingUp, Zap } from 'lucide-react';
+import { realProjects, projectCategories, portfolioStats } from '../data/projects';
 
 const Projects = () => {
   const [ref, inView] = useInView({
@@ -9,56 +10,29 @@ const Projects = () => {
     threshold: 0.1,
   });
 
-  const projects = [
-    {
-      title: 'E-Commerce Platform',
-      description: 'A full-featured e-commerce solution with real-time inventory management, secure payment processing, and advanced search capabilities built with MERN stack.',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Express', 'Stripe'],
-      liveDemo: '#',
-      github: 'https://github.com/Konete326/',
-      gradient: 'from-blue-500 to-cyan-500',
-    },
-    {
-      title: 'Task Management App',
-      description: 'Real-time collaborative task management system with drag-and-drop interface, team workspaces, and progress tracking using Angular and .NET.',
-      technologies: ['Angular', '.NET', 'SQL Server', 'SignalR'],
-      liveDemo: '#',
-      github: 'https://github.com/Konete326/',
-      gradient: 'from-purple-500 to-pink-500',
-    },
-    {
-      title: 'Blog Platform',
-      description: 'Modern blogging platform with rich text editor, comment system, social sharing, and SEO optimization built with Laravel and Vue.js.',
-      technologies: ['Laravel', 'Vue.js', 'MySQL', 'Redis'],
-      liveDemo: '#',
-      github: 'https://github.com/Konete326/',
-      gradient: 'from-orange-500 to-red-500',
-    },
-    {
-      title: 'Social Media Dashboard',
-      description: 'Analytics dashboard for social media management with real-time metrics, scheduled posting, and multi-platform integration.',
-      technologies: ['React', 'Node.js', 'Firebase', 'Chart.js'],
-      liveDemo: '#',
-      github: 'https://github.com/Konete326/',
-      gradient: 'from-green-500 to-teal-500',
-    },
-    {
-      title: 'Booking System',
-      description: 'Comprehensive booking and reservation system with calendar integration, automated notifications, and payment processing.',
-      technologies: ['Angular', 'PHP', 'MySQL', 'PayPal API'],
-      liveDemo: '#',
-      github: 'https://github.com/Konete326/',
-      gradient: 'from-indigo-500 to-blue-500',
-    },
-    {
-      title: 'Weather App',
-      description: 'Beautiful weather application with location-based forecasts, interactive maps, and customizable alerts using React and OpenWeather API.',
-      technologies: ['React', 'OpenWeather API', 'Tailwind CSS'],
-      liveDemo: '#',
-      github: 'https://github.com/Konete326/',
-      gradient: 'from-yellow-500 to-orange-500',
-    },
+  const [selectedCategory, setSelectedCategory] = useState(projectCategories.ALL);
+
+  const filteredProjects = selectedCategory === projectCategories.ALL
+    ? realProjects
+    : realProjects.filter(project => project.category.includes(selectedCategory));
+
+  const categories = [
+    { id: projectCategories.ALL, label: 'All Projects', count: realProjects.length },
+    { id: projectCategories.MERN, label: 'MERN Stack', count: realProjects.filter(p => p.category.includes(projectCategories.MERN)).length },
+    { id: projectCategories.DOTNET, label: '.NET', count: realProjects.filter(p => p.category.includes(projectCategories.DOTNET)).length },
+    { id: projectCategories.LARAVEL, label: 'Laravel', count: realProjects.filter(p => p.category.includes(projectCategories.LARAVEL)).length },
+    { id: projectCategories.ENTERPRISE, label: 'Enterprise', count: realProjects.filter(p => p.category.includes(projectCategories.ENTERPRISE)).length },
+    { id: projectCategories.ECOMMERCE, label: 'E-commerce', count: realProjects.filter(p => p.category.includes(projectCategories.ECOMMERCE)).length },
   ];
+
+  const getComplexityColor = (complexity) => {
+    const colors = {
+      yellow: 'bg-yellow-500',
+      orange: 'bg-orange-500',
+      purple: 'bg-purple-500',
+    };
+    return colors[complexity.color] || 'bg-gray-500';
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -98,8 +72,57 @@ const Projects = () => {
             Featured Projects
           </motion.h2>
 
+          {/* Portfolio Stats */}
+          <motion.div
+            variants={cardVariants}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-4xl mx-auto"
+          >
+            <div className="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-xl text-center">
+              <Award className="w-8 h-8 mx-auto mb-2" />
+              <div className="text-3xl font-bold">{portfolioStats.totalProjects}</div>
+              <div className="text-sm opacity-90">Projects</div>
+            </div>
+            <div className="bg-gradient-to-br from-purple-500 to-purple-600 text-white p-6 rounded-xl text-center">
+              <Users className="w-8 h-8 mx-auto mb-2" />
+              <div className="text-3xl font-bold">{portfolioStats.totalUsers}</div>
+              <div className="text-sm opacity-90">Total Users</div>
+            </div>
+            <div className="bg-gradient-to-br from-green-500 to-green-600 text-white p-6 rounded-xl text-center">
+              <TrendingUp className="w-8 h-8 mx-auto mb-2" />
+              <div className="text-3xl font-bold">{portfolioStats.technologiesMastered.length}+</div>
+              <div className="text-sm opacity-90">Technologies</div>
+            </div>
+            <div className="bg-gradient-to-br from-orange-500 to-orange-600 text-white p-6 rounded-xl text-center">
+              <Zap className="w-8 h-8 mx-auto mb-2" />
+              <div className="text-3xl font-bold">{portfolioStats.domains.length}</div>
+              <div className="text-sm opacity-90">Domains</div>
+            </div>
+          </motion.div>
+
+          {/* Category Filters */}
+          <motion.div
+            variants={cardVariants}
+            className="flex flex-wrap justify-center gap-3 mb-12"
+          >
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => setSelectedCategory(category.id)}
+                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                  selectedCategory === category.id
+                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg scale-105'
+                    : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                }`}
+              >
+                {category.label}
+                <span className="ml-2 text-xs opacity-75">({category.count})</span>
+              </button>
+            ))}
+          </motion.div>
+
+          {/* Projects Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
+            {filteredProjects.map((project, index) => (
               <motion.div
                 key={index}
                 variants={cardVariants}
@@ -109,26 +132,66 @@ const Projects = () => {
                 <div className={`h-2 bg-gradient-to-r ${project.gradient}`} />
                 
                 <div className="p-6">
+                  {/* Complexity Badge */}
+                  <div className="flex items-center justify-between mb-3">
+                    <span className={`px-3 py-1 text-xs font-semibold text-white rounded-full ${getComplexityColor(project.complexity)}`}>
+                      {project.complexity.label}
+                    </span>
+                    {project.subtitle && (
+                      <span className="text-xs text-gray-500 dark:text-gray-400">
+                        {project.category.includes('enterprise') && '🏢 '}
+                        {project.category.includes('ecommerce') && '🛍️ '}
+                        {project.category.includes('social') && '👥 '}
+                      </span>
+                    )}
+                  </div>
+
                   {/* Project Title */}
-                  <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
+                  <h3 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
                     {project.title}
                   </h3>
 
+                  {/* Project Subtitle */}
+                  {project.subtitle && (
+                    <p className="text-sm text-blue-600 dark:text-blue-400 font-medium mb-3">
+                      {project.subtitle}
+                    </p>
+                  )}
+
                   {/* Project Description */}
-                  <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
+                  <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-4 text-sm">
                     {project.description}
                   </p>
 
+                  {/* Key Highlights */}
+                  {project.highlights && project.highlights.length > 0 && (
+                    <div className="mb-4">
+                      <ul className="text-xs text-gray-600 dark:text-gray-400 space-y-1">
+                        {project.highlights.slice(0, 2).map((highlight, idx) => (
+                          <li key={idx} className="flex items-start">
+                            <span className="text-blue-600 dark:text-blue-400 mr-1">✓</span>
+                            <span>{highlight}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
                   {/* Technologies */}
                   <div className="flex flex-wrap gap-2 mb-6">
-                    {project.technologies.map((tech, techIndex) => (
+                    {project.technologies.slice(0, 4).map((tech, techIndex) => (
                       <span
                         key={techIndex}
-                        className="px-3 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full"
+                        className="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full"
                       >
                         {tech}
                       </span>
                     ))}
+                    {project.technologies.length > 4 && (
+                      <span className="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded-full">
+                        +{project.technologies.length - 4} more
+                      </span>
+                    )}
                   </div>
 
                   {/* Project Links */}
