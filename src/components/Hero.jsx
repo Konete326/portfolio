@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { ArrowDown, Sparkles, Code, Zap } from 'lucide-react';
-import LazyImage from './LazyImage';
 
 const Hero = () => {
   const controls = useAnimation();
@@ -97,47 +96,15 @@ const Hero = () => {
         ))}
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Premium Glass Card with Image */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        {/* Premium Glass Card */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
-          className="flex flex-col items-center"
+          className="inline-block"
         >
-          {/* Professional Profile Image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
-            className="mb-8 relative"
-          >
-            <div className="relative w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56">
-              {/* Animated gradient ring */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 p-1"
-              >
-                <div className="w-full h-full rounded-full bg-gray-900" />
-              </motion.div>
-              
-              {/* Profile Image */}
-              <div className="absolute inset-2 rounded-full overflow-hidden border-4 border-white/10 shadow-2xl">
-                <LazyImage
-                  src="/uploads/sameer cv.jpg"
-                  alt="Muhammad Sameer - Full Stack Developer"
-                  className="w-full h-full object-cover"
-                  fadeIn={true}
-                />
-              </div>
-              
-              {/* Glow effect */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-2xl animate-pulse" />
-            </div>
-          </motion.div>
-
-          <div className="glass rounded-3xl p-8 md:p-12 shadow-2xl max-w-4xl w-full text-center">
+          <div className="glass rounded-3xl p-8 md:p-12 shadow-2xl">
             {/* Floating badge */}
             <motion.div
               initial={{ opacity: 0, y: -20 }}
