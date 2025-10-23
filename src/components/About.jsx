@@ -41,7 +41,7 @@ const About = () => {
         >
           <motion.h2
             variants={itemVariants}
-            className="text-4xl md:text-5xl font-bold text-center mb-12 gradient-text"
+            className="text-4xl md:text-5xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600"
           >
             About Me
           </motion.h2>
@@ -51,7 +51,7 @@ const About = () => {
               variants={itemVariants}
               className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed"
             >
-              I'm a passionate <span className="font-semibold text-primary-light dark:text-primary-dark">Full Stack Developer</span> with expertise in building modern, scalable web applications.
+              I'm a passionate <span className="font-semibold text-blue-600 dark:text-blue-400">Full Stack Developer</span> with expertise in building modern, scalable web applications.
               With a strong foundation in both frontend and backend technologies, I specialize in creating
               seamless user experiences and robust server-side solutions.
             </motion.p>
@@ -60,7 +60,7 @@ const About = () => {
               variants={itemVariants}
               className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed"
             >
-              My approach to development combines <span className="font-semibold text-primary-light dark:text-primary-dark">creativity</span> with <span className="font-semibold text-primary-light dark:text-primary-dark">problem-solving</span>, ensuring that every project
+              My approach to development combines <span className="font-semibold text-blue-600 dark:text-blue-400">creativity</span> with <span className="font-semibold text-blue-600 dark:text-blue-400">problem-solving</span>, ensuring that every project
               I work on is not only functional but also innovative and user-friendly. I'm constantly learning
               and adapting to new technologies to stay at the forefront of web development.
             </motion.p>
@@ -69,7 +69,7 @@ const About = () => {
               variants={itemVariants}
               className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed"
             >
-              Whether it's architecting complex systems with <span className="font-semibold text-primary-light dark:text-primary-dark">MERN</span> or <span className="font-semibold text-primary-light dark:text-primary-dark">MEAN</span> stack, building dynamic interfaces
+              Whether it's architecting complex systems with <span className="font-semibold text-blue-600 dark:text-blue-400">MERN</span> or <span className="font-semibold text-blue-600 dark:text-blue-400">MEAN</span> stack, building dynamic interfaces
               with Angular and React, or developing robust APIs with Node.js, Laravel, and .NET, I bring
               dedication and technical excellence to every challenge.
             </motion.p>

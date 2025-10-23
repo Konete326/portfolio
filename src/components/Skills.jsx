@@ -3,9 +3,10 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { 
   SiAngular, SiReact, SiHtml5, SiCss3, SiJavascript,
-  SiNodedotjs, SiLaravel, SiDotnet, SiPhp, SiCsharp,
-  SiMysql, SiMongodb, SiFirebase, SiMicrosoftsqlserver
+  SiNodedotjs, SiLaravel, SiDotnet, SiPhp,
+  SiMysql, SiMongodb, SiFirebase
 } from 'react-icons/si';
+import { TbBrandCSharp, TbDatabase } from 'react-icons/tb';
 
 const Skills = () => {
   const [ref, inView] = useInView({
@@ -31,7 +32,7 @@ const Skills = () => {
         { name: 'Laravel', icon: SiLaravel, color: 'text-red-500', level: 85 },
         { name: '.NET', icon: SiDotnet, color: 'text-purple-600', level: 80 },
         { name: 'PHP', icon: SiPhp, color: 'text-indigo-600', level: 85 },
-        { name: 'C#', icon: SiCsharp, color: 'text-purple-700', level: 82 },
+        { name: 'C#', icon: TbBrandCSharp, color: 'text-purple-700', level: 82 },
       ],
     },
     {
@@ -40,7 +41,7 @@ const Skills = () => {
         { name: 'MySQL', icon: SiMysql, color: 'text-blue-700', level: 90 },
         { name: 'MongoDB', icon: SiMongodb, color: 'text-green-500', level: 85 },
         { name: 'Firebase', icon: SiFirebase, color: 'text-yellow-600', level: 80 },
-        { name: 'SQL Server', icon: SiMicrosoftsqlserver, color: 'text-red-700', level: 88 },
+        { name: 'SQL Server', icon: TbDatabase, color: 'text-red-700', level: 88 },
       ],
     },
   ];
@@ -78,7 +79,7 @@ const Skills = () => {
         >
           <motion.h2
             variants={categoryVariants}
-            className="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text"
+            className="text-4xl md:text-5xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600"
           >
             Technical Skills
           </motion.h2>
@@ -90,7 +91,7 @@ const Skills = () => {
                 variants={categoryVariants}
                 className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-shadow duration-300"
               >
-                <h3 className="text-2xl font-bold mb-6 text-primary-light dark:text-primary-dark">
+                <h3 className="text-2xl font-bold mb-6 text-blue-600 dark:text-blue-400">
                   {category.title}
                 </h3>
                 <div className="space-y-4">

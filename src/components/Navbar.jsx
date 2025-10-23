@@ -51,7 +51,7 @@ const Navbar = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="text-xl md:text-2xl font-bold gradient-text"
+            className="text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600"
           >
             Muhammad Sameer
           </motion.div>
@@ -66,7 +66,7 @@ const Navbar = () => {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 * index }}
-                className="text-gray-700 dark:text-gray-300 hover:text-primary-light dark:hover:text-primary-dark transition-colors duration-300 font-medium"
+                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 font-medium"
               >
                 {item.name}
               </motion.a>
@@ -131,7 +131,7 @@ const Navbar = () => {
                 key={item.name}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className="block py-2 text-gray-700 dark:text-gray-300 hover:text-primary-light dark:hover:text-primary-dark transition-colors duration-300 font-medium"
+                className="block py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 font-medium"
               >
                 {item.name}
               </a>

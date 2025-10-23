@@ -99,7 +99,7 @@ const Contact = () => {
         >
           <motion.h2
             variants={itemVariants}
-            className="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text"
+            className="text-4xl md:text-5xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600"
           >
             Get In Touch
           </motion.h2>

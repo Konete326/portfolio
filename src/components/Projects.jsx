@@ -93,7 +93,7 @@ const Projects = () => {
         >
           <motion.h2
             variants={cardVariants}
-            className="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text"
+            className="text-4xl md:text-5xl font-bold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600"
           >
             Featured Projects
           </motion.h2>
@@ -110,7 +110,7 @@ const Projects = () => {
                 
                 <div className="p-6">
                   {/* Project Title */}
-                  <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-primary-light dark:group-hover:text-primary-dark transition-colors duration-300">
+                  <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">
                     {project.title}
                   </h3>
 
@@ -166,7 +166,7 @@ const Projects = () => {
               href="https://github.com/Konete326/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-2 text-lg text-primary-light dark:text-primary-dark hover:underline"
+              className="inline-flex items-center space-x-2 text-lg text-blue-600 dark:text-blue-400 hover:underline"
             >
               <Github className="w-6 h-6" />
               <span>View More Projects on GitHub</span>
