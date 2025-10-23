@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { Code2, Zap, Award, Users } from 'lucide-react';
+import LazyImage from './LazyImage';
 
 const About = () => {
   const [ref, inView] = useInView({
@@ -41,12 +43,66 @@ const About = () => {
         >
           <motion.h2
             variants={itemVariants}
-            className="text-4xl md:text-5xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600"
+            className="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text"
           >
             About Me
           </motion.h2>
 
-          <div className="max-w-4xl mx-auto space-y-6">
+          {/* Two Column Layout - Image and Content */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Professional Image with Stats */}
+            <motion.div
+              variants={itemVariants}
+              className="relative"
+            >
+              <div className="relative">
+                {/* Main Image Container */}
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                  <LazyImage
+                    src="/uploads/sameer cv.jpg"
+                    alt="Muhammad Sameer - Full Stack Developer"
+                    className="w-full h-auto"
+                    fadeIn={true}
+                  />
+                  {/* Overlay gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                </div>
+                
+                {/* Floating Stats Cards */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                  transition={{ delay: 0.6 }}
+                  className="absolute -bottom-6 -left-6 glass rounded-xl p-4 shadow-xl"
+                >
+                  <div className="flex items-center space-x-3">
+                    <Award className="w-8 h-8 text-yellow-500" />
+                    <div>
+                      <div className="text-2xl font-bold text-white">6+</div>
+                      <div className="text-xs text-gray-300">Projects</div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+                  transition={{ delay: 0.8 }}
+                  className="absolute -top-6 -right-6 glass rounded-xl p-4 shadow-xl"
+                >
+                  <div className="flex items-center space-x-3">
+                    <Users className="w-8 h-8 text-blue-500" />
+                    <div>
+                      <div className="text-2xl font-bold text-white">23K+</div>
+                      <div className="text-xs text-gray-300">Users</div>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+
+            {/* Right: Content */}
+            <div className="space-y-6">
             <motion.p
               variants={itemVariants}
               className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed"
@@ -73,7 +129,35 @@ const About = () => {
               with Angular and React, or developing robust APIs with Node.js, Laravel, and .NET, I bring
               dedication and technical excellence to every challenge.
             </motion.p>
+            </div>
           </div>
+
+          {/* Tech Highlights */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
+          >
+            <div className="glass rounded-xl p-6 text-center hover:scale-105 transition-transform duration-300">
+              <Code2 className="w-8 h-8 mx-auto mb-3 text-purple-500" />
+              <div className="text-lg font-bold text-gray-900 dark:text-white">MERN</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Stack Expert</div>
+            </div>
+            <div className="glass rounded-xl p-6 text-center hover:scale-105 transition-transform duration-300">
+              <Zap className="w-8 h-8 mx-auto mb-3 text-yellow-500" />
+              <div className="text-lg font-bold text-gray-900 dark:text-white">.NET</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Framework</div>
+            </div>
+            <div className="glass rounded-xl p-6 text-center hover:scale-105 transition-transform duration-300">
+              <Code2 className="w-8 h-8 mx-auto mb-3 text-red-500" />
+              <div className="text-lg font-bold text-gray-900 dark:text-white">Laravel</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">PHP Master</div>
+            </div>
+            <div className="glass rounded-xl p-6 text-center hover:scale-105 transition-transform duration-300">
+              <Award className="w-8 h-8 mx-auto mb-3 text-blue-500" />
+              <div className="text-lg font-bold text-gray-900 dark:text-white">Full Stack</div>
+              <div className="text-sm text-gray-600 dark:text-gray-400">Developer</div>
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
